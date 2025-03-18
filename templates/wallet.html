@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet - PyCoin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>PyCoin Blockchain</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blockchain-view">Blockchain</a></li>
+                <li><a href="/wallet-view">Wallet</a></li>
+                <li><a href="/transaction-view">Transactions</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Wallet Information</h2>
+        
+        <div class="wallet-info">
+            <h3>Your Wallet Address</h3>
+            <div class="wallet-address">{{ wallet_address }}</div>
+            
+            <div class="actions" style="margin-top: 2rem;">
+                <a href="/transaction-view" class="btn">Create New Transaction</a>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <h3>Copy Your Wallet Address</h3>
+            <div class="form-group">
+                <input type="text" class="form-control" id="wallet-address-input" 
+                       value="{{ wallet_address }}" readonly>
+                <button class="btn" onclick="copyWalletAddress()" style="margin-top: 1rem;">
+                    Copy Address
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 PyCoin Blockchain</p>
+    </footer>
+    
+    <script>
+        async function copyWalletAddress() {
+            const input = document.getElementById('wallet-address-input');
+            try {
+                await navigator.clipboard.writeText(input.value);
+                alert('Wallet address copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                // Fallback for older browsers
+                input.select();
+                document.execCommand('copy');
+                alert('Wallet address copied to clipboard!');
+            }
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

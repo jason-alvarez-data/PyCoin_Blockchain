@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain View - PyCoin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>PyCoin Blockchain</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blockchain-view">Blockchain</a></li>
+                <li><a href="/wallet-view">Wallet</a></li>
+                <li><a href="/transaction-view">Transactions</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Blockchain Explorer</h2>
+        
+        <div class="blockchain-stats">
+            <div class="stat">
+                <h3>Chain Length</h3>
+                <p>{{ chain|length }}</p>
+            </div>
+            <div class="stat">
+                <h3>Latest Block</h3>
+                <p class="timestamp">{{ chain[-1].timestamp if chain else 'None' }}</p>
+            </div>
+            <div class="actions">
+                <button id="mine-btn" class="btn">Mine New Block</button>
+            </div>
+        </div>
+        
+        <div class="blockchain-container">
+            {% for block in chain %}
+            <div class="block">
+                <div class="block-header">
+                    <h3>Block #{{ loop.index0 }}</h3>
+                    <span class="timestamp">{{ block.timestamp }}</span>
+                </div>
+                <div class="block-content">
+                    <p><strong>Hash:</strong> <span class="hash">{{ block.hash }}</span></p>
+                    <p><strong>Previous Hash:</strong> <span class="prev-hash">{{ block.last_hash }}</span></p>
+                    <p><strong>Difficulty:</strong> {{ block.difficulty }}</p>
+                    <p><strong>Nonce:</strong> {{ block.nonce }}</p>
+                    
+                    <div class="transactions">
+                        <h4>Transactions</h4>
+                        {% if block.data %}
+                            {% for tx in block.data %}
+                            <div class="transaction">
+                                <p><strong>From:</strong> {{ tx.sender_wallet }}</p>
+                                <p><strong>To:</strong> {{ tx.recipient }}</p>
+                                <p><strong>Amount:</strong> {{ tx.amount }}</p>
+                                <p><strong>ID:</strong> {{ tx.id }}</p>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No transactions in this block</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 PyCoin Blockchain</p>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

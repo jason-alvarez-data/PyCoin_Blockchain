@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCoin Blockchain</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>PyCoin Blockchain</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blockchain-view">Blockchain</a></li>
+                <li><a href="/wallet-view">Wallet</a></li>
+                <li><a href="/transaction-view">Transactions</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h2>Welcome to PyCoin</h2>
+            <p>A simple blockchain cryptocurrency implementation in Python</p>
+            <div class="actions">
+                <a href="/blockchain-view" class="btn">View Blockchain</a>
+                <a href="/transaction-view" class="btn">Create Transaction</a>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="feature">
+                <h3>Blockchain</h3>
+                <p>Explore the current state of the blockchain with our interactive explorer. View blocks, transactions, and mining details.</p>
+            </div>
+            <div class="feature">
+                <h3>Mining</h3>
+                <p>Mine new blocks and earn rewards. Our proof-of-work algorithm adjusts difficulty to maintain consistent block times.</p>
+            </div>
+            <div class="feature">
+                <h3>Transactions</h3>
+                <p>Create and verify transactions with cryptographic signatures. Send PyCoin to any wallet address securely.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 PyCoin Blockchain</p>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
